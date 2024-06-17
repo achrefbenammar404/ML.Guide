@@ -2,6 +2,8 @@
 from crewai import Agent
 from streamlitHelpers import create_streamlit_callback
 from tools import * 
+from langchain_groq import ChatGroq
+
 agent_emojis = {
     "Problem_Definition_Agent": "🔍",
     "Data_Assessment_Agent": "📊",
@@ -11,7 +13,16 @@ agent_emojis = {
     "Summarization_Agent": "📝"
 }
 
-def initialize_agents(llm):
+def initialize_agents(llm : ChatGroq ) -> dict:
+    """
+    Initialize and configure the agents for ML.Guide.
+
+    Args:
+        llm: The llm client to be used by the agents.
+
+    Returns:
+        dict: A dictionary containing the initialized agents.
+    """
     Problem_Definition_Agent = Agent(
         role='Problem_Definition_Agent',
         goal="""Clarify the machine learning problem the user wants to solve, identifying the type of problem (e.g., classification, regression) and any specific requirements.""",
