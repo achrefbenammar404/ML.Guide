@@ -3,9 +3,13 @@
 
 ML Guide is a multi-LLM agent system designed to assist users with their machine learning problems. This project was developed during a 17-hour hackathon at the AI National Summit (AINS) event on June 9, 2024.
 
-##Here is a demo video of ML.Guide:
+# My Project
 
-[![Watch the video](https://via.placeholder.com/150)](https://drive.google.com/uc?export=download&id=1OcY07YTmq3gJRJAm04t2u0GmtLQU9d2c)
+## Here is a demo video of my project
+(Drive Link to video):
+
+[![Watch the video](app/resources/MLGuide.webp)](https://drive.google.com/uc?export=download&id=1OcY07YTmq3gJRJAm04t2u0GmtLQU9d2c)
+
 
 ## Features
 
