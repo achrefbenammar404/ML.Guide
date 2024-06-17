@@ -1,7 +1,27 @@
 # tasks.py
-from crewai import Task
+from typing import Dict, List, Any
+import pandas as pd
+from crewai import Agent, Task
 
-def setup_tasks(agents, user_question, df, uploaded_file):
+def setup_tasks(
+    agents: Dict[str, Agent],
+    user_question: str,
+    df: pd.DataFrame,
+    uploaded_file: Any
+    )  -> List[Task]:
+    """
+    Sets up tasks for agents to define the problem, assess data, recommend models, and generate code.
+
+    Args:
+        agents (Dict[str, Agent]): Dictionary of agents to handle different tasks.
+        user_question (str): The user's machine learning problem statement.
+        df (pd.DataFrame): The dataset provided by the user.
+        uploaded_file (Any): The uploaded file object containing the dataset.
+
+    Returns:
+        List[Task]: A list of tasks to be executed by the agents.
+    """
+
     task_define_problem = Task(
         description=f"Clarify and define the machine learning problem, including identifying the problem type and specific requirements. Here is the user's problem: {user_question}",
         agent=agents["Problem_Definition"],
