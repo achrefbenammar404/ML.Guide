@@ -1,3 +1,5 @@
+Here is the revised content with resized images for each tool:
+
 # ML.Guide
 
 ML Guide is a multi-LLM agent system designed to assist users with their machine learning problems. This project was developed during a 17-hour hackathon at the AI National Summit (AINS) event on June 9, 2024.
@@ -11,17 +13,21 @@ ML Guide is a multi-LLM agent system designed to assist users with their machine
 
 ## Tools Used
 
-![CrewAI Logo](https://www.google.com/imgres?q=crewAI%C2%A0&imgurl=https%3A%2F%2Fwww.marktechpost.com%2Fwp-content%2Fuploads%2F2024%2F01%2FScreenshot-2024-01-16-at-12.30.59-PM.png&imgrefurl=https%3A%2F%2Fwww.marktechpost.com%2F2024%2F01%2F16%2Fmeet-crewai-an-artificial-intelligenceframework-for-orchestrating-role-playing-autonomous-ai-agents%2F&docid=OgJj1Xwjzgbq8M&tbnid=3pdoYvfaZ5gntM&vet=12ahUKEwj16JCrh-OGAxXIQ6QEHWRqDB0QM3oECBkQAA..i&w=776&h=482&hcb=2&ved=2ahUKEwj16JCrh-OGAxXIQ6QEHWRqDB0QM3oECBkQAA)
-![arXiv Logo](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsimple.wikipedia.org%2Fwiki%2FArXiv&psig=AOvVaw2jFfhKsyMGdRCPYKyvtKVG&ust=1718728101180000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKj_uKGH44YDFQAAAAAdAAAAABAR)
-![JinaAI Logo](https://www.google.com/imgres?q=jinaai&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D100069744460205&imgrefurl=https%3A%2F%2Fwww.facebook.com%2Fopensourcejina%2F&docid=ouWLy-347uYrMM&tbnid=43lfVC5_lyYEdM&vet=12ahUKEwj46MWQh-OGAxVkSKQEHXQGBSsQM3oECBUQAA..i&w=1620&h=1620&hcb=2&ved=2ahUKEwj46MWQh-OGAxVkSKQEHXQGBSsQM3oECBUQAA)
-![Sweetviz Logo](https://www.google.com/imgres?q=sweetviz&imgurl=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2FD4D12AQEKkHUM-81dTg%2Farticle-cover_image-shrink_600_2000%2F0%2F1681819079845%3Fe%3D2147483647%26v%3Dbeta%26t%3D2OrZYF2fQrhlolvTNAXArkjNiN2OfOJr2Axf_QmnGCE&imgrefurl=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fsweetviz-360-digitmg&docid=PSPUhfdmXsBBAM&tbnid=8XaB4ZAILdfMSM&vet=12ahUKEwjQh-GYh-OGAxUkcKQEHTO-BhEQM3oECEkQAA..i&w=500&h=120&hcb=2&ved=2ahUKEwjQh-GYh-OGAxUkcKQEHTO-BhEQM3oECEkQAA)
+<table>
+  <tr>
+    <td><img src="app/resources/crew_only_logo.png" alt="CrewAI Logo" width="100"/></td>
+    <td><img src="app/resources/ArXiv_logo_2022.png" alt="arXiv Logo" width="100"/></td>
+    <td><img src="app/resources/jinaai.png" alt="JinaAI Logo" width="100"/></td>
+    <td><img src="app/resources/sweetviz.png" alt="Sweetviz Logo" width="100"/></td>
+  </tr>
+</table>
 
 ### Tool Explanations
 
-- **CrewAI**: This platform is used for orchestrating multiple AI agents to work together efficiently, providing the backbone for managing and integrating different AI models to solve complex problems【6†source】【7†source】.
-- **arXiv**: A repository of electronic preprints (known as e-prints) approved for publication after moderation, but not peer-reviewed. It provides access to the latest research papers in the field of machine learning and other scientific areas【5†source】.
-- **JinaAI**: This tool is used for neural search, enabling efficient and effective search capabilities across different data types, which is essential for finding relevant information and solutions related to the user's problem【5†source】.
-- **Sweetviz**: An open-source Python library that generates beautiful, high-density visualizations of a pandas DataFrame, aiding in performing exploratory data analysis (EDA) to give users insights into their dataset【6†source】.
+- **CrewAI**: This platform is used for orchestrating multiple AI agents to work together efficiently, providing the backbone for managing and integrating different AI models to solve complex problems  .
+- **arXiv**: A repository of electronic preprints (known as e-prints) approved for publication after moderation, but not peer-reviewed. It provides access to the latest research papers in the field of machine learning and other scientific areas .
+- **JinaAI**: This tool is used for neural search, enabling efficient and effective search capabilities across different data types, which is essential for finding relevant information and solutions related to the user's problem .
+- **Sweetviz**: An open-source Python library that generates beautiful, high-density visualizations of a pandas DataFrame, aiding in performing exploratory data analysis (EDA) to give users insights into their dataset .
 
 ## Installation
 
@@ -49,7 +55,6 @@ To get started with ML Guide, follow these steps:
    ```ini
    GROQ_API_KEY = "your_Groq_api_key_here"
    JINA_API_KEY = "your_jina_api_key_here"
-   SERPER_API_KEY = "your_serper_api_key_here"
    ```
 
 ## Usage
