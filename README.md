@@ -1,4 +1,3 @@
-Here is the revised content with resized images for each tool:
 
 # ML.Guide
 
