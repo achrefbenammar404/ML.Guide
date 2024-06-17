@@ -1,33 +1,38 @@
-from crewai_tools import tool 
-import os 
-import matplotlib.pyplot as plt 
-import numpy as np 
+from crewai_tools import tool
+import os
+import matplotlib.pyplot as plt
+import numpy as np
 import requests
-import logging 
-from textwrap import dedent 
+import logging
+from textwrap import dedent
 from bs4 import BeautifulSoup
 import arxiv
 import fitz  # PyMuPDF
-import pandas as pd 
+import pandas as pd
 import sweetviz as sv
-import streamlit as st 
+import streamlit as st
+from typing import List, Union
+
 api_key = os.getenv('JINA_API_KEY')
 
-
-
-@tool("create pie plot ")
-def create_pie_plot(data, labels, title, filename):
+@tool("create pie plot")
+def create_pie_plot(
+    data: List[float], 
+    labels: List[str], 
+    title: str, 
+    filename: str
+    ) -> str:
     """
     Creates a pie plot using Matplotlib, saves it as an image, and returns its path.
 
     Parameters:
-        - data (list): A list of numerical values representing the sizes of the sectors.
-        - labels (list): A list of strings representing the labels for each sector.
-        - title (str): The title of the pie plot.
-        - filename (str): The descriptive filename for the saved image.
+        data (List[float]): A list of numerical values representing the sizes of the sectors.
+        labels (List[str]): A list of strings representing the labels for each sector.
+        title (str): The title of the pie plot.
+        filename (str): The descriptive filename for the saved image.
 
     Returns:
-        - str: The path to the saved pie plot image.
+        str: The path to the saved pie plot image.
     """
     if not os.path.exists("./plots"):
         os.makedirs("./plots")
@@ -40,22 +45,28 @@ def create_pie_plot(data, labels, title, filename):
     plt.close()
     return os.path.join("./plots", filename)
 
-
-@tool("create scatter plot ")
-def create_scatter_plot(x_data, y_data, title, filename, xlabel=None, ylabel=None):
+@tool("create scatter plot")
+def create_scatter_plot(
+    x_data: Union[List[float], np.ndarray], 
+    y_data: Union[List[float], np.ndarray], 
+    title: str, 
+    filename: str, 
+    xlabel: str = None, 
+    ylabel: str = None
+    ) -> str:
     """
     Creates a scatter plot using Matplotlib, saves it as an image, and returns its path.
 
     Parameters:
-        - x_data (array-like): The x-coordinates of the data points.
-        - y_data (array-like): The y-coordinates of the data points.
-        - title (str): The title of the scatter plot.
-        - xlabel (str, optional): The label for the x-axis.
-        - ylabel (str, optional): The label for the y-axis.
-        - filename (str): The descriptive filename for the saved image.
+        x_data (Union[List[float], np.ndarray]): The x-coordinates of the data points.
+        y_data (Union[List[float], np.ndarray]): The y-coordinates of the data points.
+        title (str): The title of the scatter plot.
+        xlabel (str, optional): The label for the x-axis.
+        ylabel (str, optional): The label for the y-axis.
+        filename (str): The descriptive filename for the saved image.
 
     Returns:
-        - str: The path to the saved scatter plot image.
+        str: The path to the saved scatter plot image.
     """
     if not os.path.exists("./plots"):
         os.makedirs("./plots")
@@ -71,22 +82,28 @@ def create_scatter_plot(x_data, y_data, title, filename, xlabel=None, ylabel=Non
     plt.close()
     return os.path.join("./plots", filename)
 
-
-@tool("create bar plot ")
-def create_bar_plot(data, x_labels, title, filename, xlabel=None, ylabel=None):
+@tool("create bar plot")
+def create_bar_plot(
+    data: Union[List[float], np.ndarray], 
+    x_labels: List[str], 
+    title: str, 
+    filename: str, 
+    xlabel: str = None, 
+    ylabel: str = None
+    ) -> str:
     """
     Creates a bar plot using Matplotlib, saves it as an image, and returns its path.
 
     Parameters:
-        - data (array-like): The heights of the bars.
-        - x_labels (array-like): The labels for the x-axis.
-        - title (str): The title of the bar plot.
-        - xlabel (str, optional): The label for the x-axis.
-        - ylabel (str, optional): The label for the y-axis.
-        - filename (str): The descriptive filename for the saved image.
+        data (Union[List[float], np.ndarray]): The heights of the bars.
+        x_labels (List[str]): The labels for the x-axis.
+        title (str): The title of the bar plot.
+        xlabel (str, optional): The label for the x-axis.
+        ylabel (str, optional): The label for the y-axis.
+        filename (str): The descriptive filename for the saved image.
 
     Returns:
-        - str: The path to the saved bar plot image.
+        str: The path to the saved bar plot image.
     """
     if not os.path.exists("./plots"):
         os.makedirs("./plots")
@@ -102,22 +119,28 @@ def create_bar_plot(data, x_labels, title, filename, xlabel=None, ylabel=None):
     plt.close()
     return os.path.join("./plots", filename)
 
-
-@tool("create time series plot ")
-def create_time_series_plot(x_data, y_data, title, filename, xlabel=None, ylabel=None):
+@tool("create time series plot")
+def create_time_series_plot(
+    x_data: Union[List[float], np.ndarray], 
+    y_data: Union[List[float], np.ndarray], 
+    title: str, 
+    filename: str, 
+    xlabel: str = None, 
+    ylabel: str = None
+    ) -> str:
     """
     Creates a time series plot using Matplotlib, saves it as an image, and returns its path.
 
     Parameters:
-        - x_data (array-like): The x-coordinates (time points) of the data points.
-        - y_data (array-like): The y-coordinates (values) of the data points.
-        - title (str): The title of the time series plot.
-        - xlabel (str, optional): The label for the x-axis.
-        - ylabel (str, optional): The label for the y-axis.
-        - filename (str): The descriptive filename for the saved image.
+        x_data (Union[List[float], np.ndarray]): The x-coordinates (time points) of the data points.
+        y_data (Union[List[float], np.ndarray]): The y-coordinates (values) of the data points.
+        title (str): The title of the time series plot.
+        xlabel (str, optional): The label for the x-axis.
+        ylabel (str, optional): The label for the y-axis.
+        filename (str): The descriptive filename for the saved image.
 
     Returns:
-        - str: The path to the saved time series plot image.
+        str: The path to the saved time series plot image.
     """
     if not os.path.exists("./plots"):
         os.makedirs("./plots")
@@ -133,23 +156,30 @@ def create_time_series_plot(x_data, y_data, title, filename, xlabel=None, ylabel
     plt.close()
     return os.path.join("./plots", filename)
 
-
-@tool("create heat map ")
-def create_heatmap(data, x_labels, y_labels, title, filename, xlabel=None, ylabel=None):
+@tool("create heat map")
+def create_heatmap(
+    data: Union[np.ndarray, List[List[float]]], 
+    x_labels: List[str], 
+    y_labels: List[str], 
+    title: str, 
+    filename: str, 
+    xlabel: str = None, 
+    ylabel: str = None
+    ) -> str:
     """
     Creates a heatmap using Matplotlib, saves it as an image, and returns its path.
 
     Parameters:
-        - data (2D array-like): The data values for the heatmap.
-        - x_labels (array-like): Labels for the x-axis.
-        - y_labels (array-like): Labels for the y-axis.
-        - title (str): The title of the heatmap.
-        - xlabel (str, optional): The label for the x-axis.
-        - ylabel (str, optional): The label for the y-axis.
-        - filename (str): The descriptive filename for the saved image.
+        data (Union[np.ndarray, List[List[float]]]): The data values for the heatmap.
+        x_labels (List[str]): Labels for the x-axis.
+        y_labels (List[str]): Labels for the y-axis.
+        title (str): The title of the heatmap.
+        xlabel (str, optional): The label for the x-axis.
+        ylabel (str, optional): The label for the y-axis.
+        filename (str): The descriptive filename for the saved image.
 
     Returns:
-        - str: The path to the saved heatmap image.
+        str: The path to the saved heatmap image.
     """
     if not os.path.exists("./plots"):
         os.makedirs("./plots")
@@ -167,10 +197,8 @@ def create_heatmap(data, x_labels, y_labels, title, filename, xlabel=None, ylabe
     plt.close()
     return os.path.join("./plots", filename)
 
-
-
 @tool("web search")
-def perform_web_search(query):
+def perform_web_search(query: str) -> str:
     """
     Perform a web search using Jina AI's Reader and Searcher tools.
 
@@ -180,6 +208,7 @@ def perform_web_search(query):
 
     Args:
         query (str): The search query.
+
     Returns:
         str: Content of the top search result with resized images.
     """
@@ -239,31 +268,28 @@ def perform_web_search(query):
     except requests.RequestException as e:
         logging.error(f"Error performing search: {e}")
         return f"Error performing search: {e}"
-    
 
-@tool("markdown sheat sheet")
-def markdown_cheat_sheet():
+@tool("markdown cheat sheet")
+def markdown_cheat_sheet() -> str:
     """
     This tool provides a markdown cheat sheet with examples of various formatting options.
+
     Returns:
         str: A markdown cheat sheet with examples.
     """
-    return dedent("""\Creating a markdown report with images and other elements can be quite straightforward. Here's a cheat sheet to get you started:
-    
+    return dedent("""
     ### Headers
 
     # Header 1
     ## Header 2
     ### Header 3
 
-    
     ### Text Formatting
     
     **Bold Text**
     *Italic Text*
     ~~Strikethrough Text~~
 
-    
     ### Lists
 
     - Item 1
@@ -271,19 +297,15 @@ def markdown_cheat_sheet():
       - Sub-item 1
       - Sub-item 2
 
-
-    
     ### Blockquotes
     
     > This is a blockquote.
     
-    
     ### Code Blocks
     
-    python
+    ```python
     print("Hello, World!")
-    
-    
+    ```
     
     ### Tables
     
@@ -291,25 +313,36 @@ def markdown_cheat_sheet():
     |----------|----------|
     | Data 1   | Data 2   |
     
-    
     ### Horizontal Lines
     
     ---
     
-    
     ### Inline HTML
+    
     You can also use HTML directly in markdown for more complex formatting.
     
-    Remember to replace placeholders with your actual content. Markdown is quite flexible, so you can mix and match these elements as needed to create your report.""")
+    Remember to replace placeholders with your actual content. Markdown is quite flexible, so you can mix and match these elements as needed to create your report.
+    """)
 
-def download_and_extract_pdf(url, max_pages=2):
-    # Download the PDF
+def download_and_extract_pdf(
+    url: str, 
+    max_pages: int = 2
+    ) -> str:
+    """
+    Downloads a PDF from the given URL and extracts text from the first few pages.
+
+    Parameters:
+        url (str): The URL of the PDF to download.
+        max_pages (int): The maximum number of pages to extract text from. Default is 2.
+
+    Returns:
+        str: The extracted text from the PDF.
+    """
     response = requests.get(url)
     filename = 'temp.pdf'
     with open(filename, 'wb') as f:
         f.write(response.content)
     
-    # Extract text from the PDF
     text = ""
     with fitz.open(filename) as doc:
         for page_num in range(min(max_pages, doc.page_count)):
@@ -320,18 +353,17 @@ def download_and_extract_pdf(url, max_pages=2):
 
 client = arxiv.Client()
 
-
 @tool("Search Arxiv research papers")
-def search_arxiv(query):
+def search_arxiv(query: str) -> str:
     """
     Search for research papers on arXiv and return the results in Markdown format.
-    
+
     Args:
-    - query (str): The search query to find relevant papers.
-    
+        query (str): The search query to find relevant papers.
+
     Returns:
-    - str: A string containing the search results formatted in Markdown.
-    
+        str: A string containing the search results formatted in Markdown.
+
     The output includes:
     - Paper title
     - Authors
@@ -339,14 +371,14 @@ def search_arxiv(query):
     - Summary
     - Extracted content from the first page of the PDF
     - Link to the full PDF
-    
+
     Example usage:
     ```python
-    markdown_results = search_arxiv_markdown("machine learning")
+    markdown_results = search_arxiv("machine learning")
     print(markdown_results)
     ```
     """
-    max_results=10
+    max_results = 10
     search = arxiv.Search(
         query=query,
         max_results=max_results,
@@ -354,7 +386,6 @@ def search_arxiv(query):
     )
     results = client.results(search)
     
-    # Markdown formatted string
     markdown_output = ""
     
     for result in results:
@@ -366,20 +397,14 @@ def search_arxiv(query):
             'pdf_url': result.pdf_url
         }
         
-        # Extract text from the first page of the PDF
         paper_text = download_and_extract_pdf(paper_info['pdf_url'])
         
-        # Formatting as markdown
-        markdown_output += f"## Research Paper Found\n"
         markdown_output += f"## {paper_info['title']}\n"
         markdown_output += f"**Authors**: {', '.join(paper_info['authors'])}\n\n"
         markdown_output += f"**Published**: {paper_info['published']}\n\n"
         markdown_output += f"**Summary**: {paper_info['summary']}\n\n"
-        markdown_output += f"**Content**: {paper_text[int(0.3 * len(paper_text)):int(0.9 * len(paper_text))]}...\n\n"  # Limiting to first 2000 characters for brevity
+        markdown_output += f"**Content**: {paper_text[:2000]}...\n\n"
         markdown_output += f"[PDF Link]({paper_info['pdf_url']})\n\n"
         markdown_output += "---\n\n"
     
     return markdown_output
-
-
-    
